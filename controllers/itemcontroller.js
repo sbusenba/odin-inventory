@@ -10,7 +10,11 @@ exports.items = asyncHandler(async (req, res, next) => {
     Category.find({}).exec(),
   ]);
 
-  res.render("item_list", { items: items, categories: categories });
+  res.render("item_list", {
+    title: "Items",
+    items: items,
+    categories: categories,
+  });
 });
 exports.item_add_get = asyncHandler(async (req, res, next) => {
   const [items, categories] = await Promise.all([
@@ -18,13 +22,58 @@ exports.item_add_get = asyncHandler(async (req, res, next) => {
     Category.find({}).exec(),
   ]);
 
-  res.render("item_form", { items: items, categories: categories });
+  res.render("item_form", {
+    title: "Add Item",
+    items: items,
+    categories: categories,
+  });
 });
-exports.item_add_post = asyncHandler(async (req, res, next) => {
-  const [items, categories] = await Promise.all([
-    Item.find({}).sort({ name: 1 }).populate("category").exec(),
-    Category.find({}).exec(),
-  ]);
+exports.item_add_post = [
+  (req, res, next) => {
+    if (!(req.body.category instanceof Array)) {
+      if (typeof req.body.category === "undefined") req.body.category = [];
+      else req.body.category = new Array(req.body.category);
+    }
+    next();
+  },
+  body("item_name", "Name must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("price", "Price must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("quantity", "Name must not be empty.")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("category.*").escape(),
 
-  res.render("item_form", { items: items, categories: categories });
-});
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    const item = new Item({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      quantity: req.body.price,
+      categories: req.body.category,
+    });
+    if (!errors.isEmpty()) {
+      const allCategories = await Category.find({}).exec();
+      for (const category of allCategories) {
+        if (item.category.indexOf(category._id) > -1) {
+          category.checked = "true";
+        }
+      }
+      res.render("item_form", {
+        title: "Create Item",
+        item: item,
+        categories: allCategories,
+      });
+    } else {
+      await item.save();
+      redirect(item.url);
+    }
+  }),
+];
