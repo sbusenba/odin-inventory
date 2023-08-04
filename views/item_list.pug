@@ -1,0 +1,10 @@
+extends layout
+
+block content 
+  h1=title
+  for item in items
+    div.item
+      p.itemheader=item.name 
+      p.itemdesc=item.description 
+      p.itemprice=item.price 
+      p.stock=`Quantity:${item.numberinstock}`
