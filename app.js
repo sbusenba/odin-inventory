@@ -7,9 +7,18 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var categoryRouter = require("./routes/category");
-
+var connectString = require("./mongodbcreds");
 var app = express();
 
+const mongoose = require("mongoose");
+
+mongoose.set("strictQuery", false);
+
+async function main() {
+  await mongoose.connect(connectString);
+}
+
+main().catch((err) => console.log(err));
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
