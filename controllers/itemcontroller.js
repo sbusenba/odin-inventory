@@ -6,7 +6,7 @@ const asyncHandler = require("express-async-handler");
 
 exports.items = asyncHandler(async (req, res, next) => {
   const [items, categories] = await Promise.all([
-    Item.find({}).sort({ name: 1 }).populate("category").exec(),
+    Item.find({}).sort({ name: 1 }).populate("categories").exec(),
     Category.find({}).exec(),
   ]);
 
@@ -18,7 +18,7 @@ exports.items = asyncHandler(async (req, res, next) => {
 });
 exports.item_add_get = asyncHandler(async (req, res, next) => {
   const [items, categories] = await Promise.all([
-    Item.find({}).sort({ name: 1 }).populate("category").exec(),
+    Item.find({}).sort({ name: 1 }).populate("categories").exec(),
     Category.find({}).exec(),
   ]);
 
@@ -48,15 +48,14 @@ exports.item_add_post = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("category.*").escape(),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     const item = new Item({
-      name: req.body.name,
-      description: req.body.description,
+      name: req.body.item_name,
+      description: req.body.item_description,
       price: req.body.price,
-      quantity: req.body.price,
+      quantity: req.body.quantity,
       categories: req.body.category,
     });
     if (!errors.isEmpty()) {
@@ -73,7 +72,7 @@ exports.item_add_post = [
       });
     } else {
       await item.save();
-      redirect(item.url);
+      res.redirect(item.url);
     }
   }),
 ];
