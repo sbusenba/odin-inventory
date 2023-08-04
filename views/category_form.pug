@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+  h1=title
+  form(method="POST" action="") 
+    label(for='category_name') Item Name:
+    input#category_name.form-control(type='text' placeholder='Item name' name='item_name' required='true' value=(undefined===category ? '' : category.name) )
+    label(for='category_description') Item Description:
+    textarea#category_description.form-control(type='textarea' placeholder='item description' name='item_description' required='true' value=(undefined===category ? '' : category.description))
+  button.btn.btn-primary(type='submit') Submit
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
+  
