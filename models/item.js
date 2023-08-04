@@ -6,7 +6,7 @@ const itemschema = new Schema({
   description: { type: String },
   categories: [{ type: Schema.Types.ObjectId }],
   price: { type: Number },
-  numberinstock: { type: Number },
+  quantity: { type: Number },
 });
 
 itemschema.virtual("url").get(function () {
