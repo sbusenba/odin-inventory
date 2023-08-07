@@ -78,3 +78,14 @@ exports.item_add_post = [
     }
   }),
 ];
+
+exports.item_detail = asyncHandler(async (req, res, next) => {
+  const item = await Item.findOne({ _id: req.params.id })
+    .populate("categories")
+    .exec();
+  console.log(item);
+  res.render("item_detail", {
+    title: item.name,
+    item: item,
+  });
+});

@@ -10,5 +10,6 @@ router.get("/", function (req, res, next) {
 router.get("/items/add", itemController.item_add_get);
 router.post("/items/add", itemController.item_add_post);
 router.get("/items", itemController.items);
+router.get("/items/:id", itemController.item_detail);
 
 module.exports = router;
