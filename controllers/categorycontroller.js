@@ -50,10 +50,10 @@ exports.add_category_post = [
 ];
 
 exports.category_detail = asyncHandler(async (req, res, next) => {
-  console.log(req.params._id);
+  console.log(req.params.id);
   const [category, category_items] = await Promise.all([
-    Category.find(req.params._id),
-    Item.find({ category: req.params.id }),
+    Category.find({ _id: req.params.id }).exec(),
+    Item.find({ categories: req.params.id }).exec(),
   ]);
   res.render("category_detail", {
     title: "Category Detail",

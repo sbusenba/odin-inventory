@@ -9,10 +9,10 @@ block content
     h4 Items
 
     dl
-      each category in category_items
+      each item in category_items
         dt
-          a(href=category.url) #{category.name}
-        dd #{category.description}
+          a(href=item.url) #{item.name}
+        dd #{item.description}
 
       else
         p This category has no items
