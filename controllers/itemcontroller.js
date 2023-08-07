@@ -28,6 +28,7 @@ exports.item_add_get = asyncHandler(async (req, res, next) => {
     categories: categories,
   });
 });
+
 exports.item_add_post = [
   (req, res, next) => {
     if (!(req.body.category instanceof Array)) {
@@ -50,6 +51,7 @@ exports.item_add_post = [
     .escape(),
 
   asyncHandler(async (req, res, next) => {
+    console.log("body", req.body.category);
     const errors = validationResult(req);
     const item = new Item({
       name: req.body.item_name,
