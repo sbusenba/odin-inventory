@@ -10,10 +10,12 @@ block content
 
     dl
       each item in category_items
-        dt
-          a(href=item.url) #{item.name}
-        dd #{item.description}
-
+        div.item
+          a(href=item.url)
+            p.itemheader=item.name 
+          p.itemdesc=item.description 
+          p.itemprice=item.price 
+          p.stock=`Quantity:${item.quantity}`
       else
         p This category has no items
   p
