@@ -1,10 +1,8 @@
 extends layout
 
 block content 
-  h1=title
-    a(href=item.url)
-      div.item
-        p.itemheader=item.name 
-        p.itemdesc=item.description 
-        p.itemprice=item.price 
-        p.stock=`Quantity:${item.quantity}`
+  div.item
+    p.itemheader=item.name 
+    p.itemdesc=item.description 
+    p.itemprice=item.price 
+    p.stock=`Quantity:${item.quantity}`
