@@ -1,11 +1,16 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   display: flex;
+  margin: 0px;
   flex-direction: row;
   align-items: flex-start;
 }
-
+.content {
+  height: 100vh;
+  overflow-y: scroll;
+  margin: 0px;
+  width: 80vw;
+}
 a {
   color: #00b7ff;
 }
@@ -19,5 +24,13 @@ a {
 }
 .sidebar {
   min-width: 200px;
+  margin: 0;
   list-style: none;
+  background-color: midnightblue;
+  height: 100vh;
+}
+.sidebar > li {
+  margin: 1rem;
+  color: aliceblue;
+  font-size: larger;
 }
