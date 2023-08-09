@@ -78,6 +78,21 @@ exports.item_add_post = [
     }
   }),
 ];
+exports.item_update_get = asyncHandler(async (req, res, next) => {
+  console.log(req.params.id);
+  res.send(`item ${req.params.id} update, not yet implemented`);
+});
+
+exports.item_update_post = asyncHandler(async (req, res, next) => {
+  res.send("item update, not yet implemented");
+});
+
+exports.item_delete_get = asyncHandler(async (req, res, next) => {
+  res.send("item delete get, not yet implemented");
+});
+exports.item_delete_post = asyncHandler(async (req, res, next) => {
+  res.send("item delete post, not yet implemented");
+});
 
 exports.item_detail = asyncHandler(async (req, res, next) => {
   const item = await Item.findOne({ _id: req.params.id })
