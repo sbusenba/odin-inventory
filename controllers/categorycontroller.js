@@ -12,6 +12,21 @@ exports.category_list = asyncHandler(async (req, res, next) => {
   });
 });
 
+exports.category_update_get = asyncHandler(async (req, res, next) => {
+  res.send("category update, not yet implemented");
+});
+
+exports.category_update_post = asyncHandler(async (req, res, next) => {
+  res.send("category update, not yet implemented");
+});
+
+exports.delete_category_get = asyncHandler(async (req, res, next) => {
+  res.send("category delete get, not yet implemented");
+});
+exports.delete_category_post = asyncHandler(async (req, res, next) => {
+  res.send("category delete post, not yet implemented");
+});
+
 exports.add_category_get = asyncHandler(async (req, res, next) => {
   res.render("category_form", {
     title: "Add Category",
