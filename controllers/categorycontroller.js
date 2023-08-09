@@ -13,6 +13,7 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.category_update_get = asyncHandler(async (req, res, next) => {
+  console.log(req.params.id);
   res.send(`category ${req.params.id} update, not yet implemented`);
 });
 
@@ -67,7 +68,7 @@ exports.add_category_post = [
 exports.category_detail = asyncHandler(async (req, res, next) => {
   console.log(req.params.id);
   const [category, category_items] = await Promise.all([
-    Category.find({ _id: req.params.id }).exec(),
+    Category.findById(req.params.id).exec(),
     Item.find({ categories: req.params.id }).exec(),
   ]);
   res.render("category_detail", {
