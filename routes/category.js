@@ -7,6 +7,10 @@ const categoryController = require("../controllers/categorycontroller");
 router.get("/add", categoryController.add_category_get);
 
 router.post("/add", categoryController.add_category_post);
+router.get("/:id/update", categoryController.category_update_get);
+router.post("/:id/update", categoryController.category_update_post);
+router.get("/:id/delete", categoryController.delete_category_get);
+router.post("/:id/delete", categoryController.delete_category_post);
 router.get("/:id", categoryController.category_detail);
 router.get("/", categoryController.category_list);
 

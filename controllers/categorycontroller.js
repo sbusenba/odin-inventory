@@ -13,7 +13,7 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.category_update_get = asyncHandler(async (req, res, next) => {
-  res.send("category update, not yet implemented");
+  res.send(`category ${req.params.id} update, not yet implemented`);
 });
 
 exports.category_update_post = asyncHandler(async (req, res, next) => {
