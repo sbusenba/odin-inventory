@@ -1,13 +1,13 @@
 extends layout 
 
 block content 
-  h1=title
+  h1=title+((category===undefined)?'':": "+category.name)
 
   form(method="POST" action="") 
     label(for='categoryname') Category Name:
     input#categoryname.form-control(type='text' placeholder='Category name' name='categoryname' required='true' value=(undefined===category ? '' : category.name) )
     label(for='categorydescription') Category Description:
-    textarea#categorydescription.form-control(type='textarea' placeholder='Category description' name='categorydescription' required='true' value=(undefined===category ? '' : category.description))
+    textarea#categorydescription.form-control(type='textarea' placeholder=(undefined===category ? 'Category description' : category.description) name='categorydescription' required='true')=(undefined===category) ? '' : category.description
     button.btn.btn-primary(type='submit') Submit
   if errors
     ul
