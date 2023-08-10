@@ -1,0 +1,10 @@
+extends layout
+
+block content 
+  div.item
+    p.itemheader=item.name 
+    p.itemdesc=item.description 
+    p.itemprice=item.price 
+    p.stock=`Quantity:${item.quantity}`
+  form(method="POST" action='')
+    button(action="submit") Confirm Delete

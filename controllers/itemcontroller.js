@@ -101,7 +101,11 @@ exports.item_update_post = asyncHandler(async (req, res, next) => {
 });
 
 exports.item_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("item delete get, not yet implemented");
+  let item = await Item.findById(req.params.id).exec();
+  res.render("item_delete", {
+    title: "Confirm Delete",
+    item: item,
+  });
 });
 exports.item_delete_post = asyncHandler(async (req, res, next) => {
   res.send("item delete post, not yet implemented");
@@ -112,6 +116,7 @@ exports.item_detail = asyncHandler(async (req, res, next) => {
     .populate("categories")
     .exec();
   console.log(item);
+  console.log(item.categories);
   res.render("item_detail", {
     title: item.name,
     item: item,
