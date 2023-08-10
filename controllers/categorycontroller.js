@@ -63,7 +63,12 @@ exports.delete_category_get = asyncHandler(async (req, res, next) => {
   });
 });
 exports.delete_category_post = asyncHandler(async (req, res, next) => {
-  res.send("category delete post, not yet implemented");
+  await Category.findByIdAndRemove(req.params.id);
+  const categories = await Category.find();
+  res.render("category_list", {
+    title: "Categories",
+    categories: categories,
+  });
 });
 
 exports.add_category_get = asyncHandler(async (req, res, next) => {
