@@ -1,11 +1,18 @@
 extends layout
 
 block content 
+  h1=title
   div.item
     p.itemheader=item.name 
     p.itemdesc=item.description 
     p.itemprice=item.price 
     p.stock=`Quantity:${item.quantity}`
+    p Categories:
+    div.categories 
+      each category in item.categories 
+        a(href=(category.url))
+          div.category
+            p.category=`${category.name}`
     div.options
       a(href=`${item.url}/update`) 
         p update 
