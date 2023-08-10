@@ -36,3 +36,18 @@ a {
   font-size: larger;
   padding-top: 40px;
 }
+.categories {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+}
+.category {
+  padding: 0.25rem;
+  background-color: #00b7ff;
+  border: 2px solid black;
+}
+.category > * {
+  border: none;
+  color: black;
+}
