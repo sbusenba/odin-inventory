@@ -63,7 +63,7 @@ exports.item_add_post = [
     if (!errors.isEmpty()) {
       const allCategories = await Category.find({}).exec();
       for (const category of allCategories) {
-        if (item.category.indexOf(category._id) > -1) {
+        if (item.categories.indexOf(category._id) > -1) {
           category.checked = "true";
         }
       }
@@ -79,8 +79,21 @@ exports.item_add_post = [
   }),
 ];
 exports.item_update_get = asyncHandler(async (req, res, next) => {
-  console.log(req.params.id);
-  res.send(`item ${req.params.id} update, not yet implemented`);
+  let [item, allCategories] = await Promise.all([
+    Item.findById(req.params.id),
+    Category.find({}).exec(),
+  ]);
+  for (const category of allCategories) {
+    if (item.categories.indexOf(category._id) > -1) {
+      category.checked = "true";
+    }
+  }
+
+  res.render("item_form", {
+    title: "Add Item",
+    item: item,
+    categories: allCategories,
+  });
 });
 
 exports.item_update_post = asyncHandler(async (req, res, next) => {
