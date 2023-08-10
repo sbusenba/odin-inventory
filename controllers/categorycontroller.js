@@ -22,7 +22,14 @@ exports.category_update_post = asyncHandler(async (req, res, next) => {
 });
 
 exports.delete_category_get = asyncHandler(async (req, res, next) => {
-  res.send("category delete get, not yet implemented");
+  const [category, itemsincategory] = await Promise.all([
+    Category.findById(req.params.id).exec(),
+    Item.find({ categories: req.params.id }).exec(),
+  ]);
+  res.render("category_delete", {
+    category,
+    itemsincategory,
+  });
 });
 exports.delete_category_post = asyncHandler(async (req, res, next) => {
   res.send("category delete post, not yet implemented");
