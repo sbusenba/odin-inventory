@@ -14,7 +14,11 @@ exports.category_list = asyncHandler(async (req, res, next) => {
 
 exports.category_update_get = asyncHandler(async (req, res, next) => {
   console.log(req.params.id);
-  res.send(`category ${req.params.id} update, not yet implemented`);
+  const category = await Category.findById(req.params.id);
+  res.render("category_form", {
+    title: "Edit Category",
+    category,
+  });
 });
 
 exports.category_update_post = asyncHandler(async (req, res, next) => {
