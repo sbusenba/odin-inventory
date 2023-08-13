@@ -51,7 +51,6 @@ exports.item_add_post = [
     .escape(),
 
   asyncHandler(async (req, res, next) => {
-    console.log("body", req.body.category);
     const errors = validationResult(req);
     const item = new Item({
       name: req.body.item_name,
@@ -61,6 +60,7 @@ exports.item_add_post = [
       categories: req.body.category,
     });
     if (!errors.isEmpty()) {
+      console.log(errors);
       const allCategories = await Category.find({}).exec();
       for (const category of allCategories) {
         if (item.categories.indexOf(category._id) > -1) {
@@ -71,6 +71,7 @@ exports.item_add_post = [
         title: "Create Item",
         item: item,
         categories: allCategories,
+        errors,
       });
     } else {
       await item.save();
@@ -78,6 +79,7 @@ exports.item_add_post = [
     }
   }),
 ];
+
 exports.item_update_get = asyncHandler(async (req, res, next) => {
   let [item, allCategories] = await Promise.all([
     Item.findById(req.params.id),
@@ -98,6 +100,7 @@ exports.item_update_get = asyncHandler(async (req, res, next) => {
 
 exports.item_update_post = [
   (req, res, next) => {
+    console.log(req);
     if (!(req.body.category instanceof Array)) {
       if (typeof req.body.category === "undefined") req.body.category = [];
       else req.body.category = new Array(req.body.category);
@@ -112,14 +115,14 @@ exports.item_update_post = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("quantity", "Name must not be empty.")
+  body("quantity", "Quantity must not be empty.")
     .trim()
     .isLength({ min: 1 })
     .escape(),
 
   asyncHandler(async (req, res, next) => {
-    console.log("body", req.body.category);
     const errors = validationResult(req);
+    console.log("body:", req.body);
     const item = new Item({
       _id: req.params.id,
       name: req.body.item_name,
@@ -135,10 +138,12 @@ exports.item_update_post = [
           category.checked = "true";
         }
       }
+      console.log(errors);
       res.render("item_form", {
         title: "Update Item",
         item: item,
         categories: allCategories,
+        errors: errors,
       });
     } else {
       await Item.findByIdAndUpdate(req.params.id, item);
