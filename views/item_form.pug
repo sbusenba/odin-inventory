@@ -2,11 +2,13 @@ extends layout
 
 block content 
   h1=title
-  form(method="POST" action="") 
+  form(method="POST" action="" ) 
+    label(for='item_image') Image: 
+    input#image_input(type="file")
     label(for='item_name') Item Name:
-      input#item_name.form-control(type='text' placeholder='Item name' name='item_name' required='true' value=(undefined===item ? '' : item.name) )
-      label(for='item_description') Item Description:
-      textarea#description.form-control(type='textarea' placeholder='item description' name='item_description' required='true')=undefined===item ? '' : item.description
+    input#item_name.form-control(type='text' placeholder='Item name' name='item_name' required='true' value=(undefined===item ? '' : item.name) )
+    label(for='item_description') Item Description:
+    textarea#description.form-control(type='textarea' placeholder='item description' name='item_description' required='true')=undefined===item ? '' : item.description
     div.form-group
       label(for='quantity') Quantity:
       input#quantity.form-control(type='text' name='quantity' value=(undefined===item ? '' : item.quantity) )

@@ -5,6 +5,7 @@ body {
   flex-direction: row;
   align-items: flex-start;
 }
+
 .content {
   height: 100vh;
   overflow-y: scroll;
@@ -12,9 +13,11 @@ body {
   width: 80vw;
   padding: 1rem;
 }
+
 a {
   color: #00b7ff;
 }
+
 .item {
   margin: 0.25rem;
   border-radius: 0.25rem;
@@ -23,6 +26,7 @@ a {
   max-width: 1200px;
   min-width: 800px;
 }
+
 .sidebar {
   min-width: 200px;
   margin: 0;
@@ -30,18 +34,21 @@ a {
   background-color: midnightblue;
   height: 100vh;
 }
+
 .sidebar > li {
   margin: 1rem;
   color: aliceblue;
   font-size: larger;
   padding-top: 40px;
 }
+
 .categories {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   padding: 0.5rem;
 }
+
 .category {
   padding: 0.25rem;
   background-color: #00b7ff;
@@ -50,4 +57,10 @@ a {
 .category > * {
   border: none;
   color: black;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
 }
