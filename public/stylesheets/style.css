@@ -16,6 +16,7 @@ body {
 
 a {
   color: #00b7ff;
+  text-decoration: none;
 }
 
 .item {
@@ -40,6 +41,7 @@ a {
   color: aliceblue;
   font-size: larger;
   padding-top: 40px;
+  font-weight: 700;
 }
 
 .categories {
